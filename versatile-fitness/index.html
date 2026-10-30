@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Versatile Fitness | Transform Your Strength & Lifestyle</title>
+  <meta name="description" content="Versatile Fitness - Premium fitness programs, elite personal training, high-performance apparel, and nutritional supplements. Elevate your potential today.">
+  <meta name="theme-color" content="#f8fafc" id="meta-theme-color">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="site-header" id="header">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" id="brand-logo">
+        <span class="logo-accent">VERSATILE</span> FITNESS
+      </a>
+      
+      <nav class="main-nav" id="main-nav" aria-label="Desktop Navigation">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#programs" class="nav-link">Programs</a></li>
+          <li><a href="#shop" class="nav-link">Shop</a></li>
+          <li><a href="#calculator" class="nav-link">BMI Calc</a></li>
+          <li><a href="#pricing" class="nav-link">Memberships</a></li>
+          <li><a href="#trainers" class="nav-link">Coaches</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Theme Toggle (Subtle Light / Subtle Dark) -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle subtle color theme" title="Switch subtle theme">
+          <span class="theme-icon theme-sun" aria-hidden="true">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </span>
+          <span class="theme-icon theme-moon" aria-hidden="true">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button class="cart-btn" id="cart-btn" aria-label="Shopping Cart">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge" id="cart-count">0</span>
+        </button>
+
+        <a href="#pricing" class="btn btn-primary nav-cta-btn" id="cta-join-nav">Join Now</a>
+
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer & Backdrop -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <a href="#hero" class="brand-logo mobile-brand" onclick="closeMobileNav()">
+        <span class="logo-accent">VERSATILE</span> FITNESS
+      </a>
+      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation menu">&times;</button>
+    </div>
+    <div class="mobile-nav-body">
+      <ul class="mobile-nav-list">
+        <li><a href="#about" class="mobile-link"><span class="m-icon">🎯</span> About Studio</a></li>
+        <li><a href="#programs" class="mobile-link"><span class="m-icon">⚡</span> Training Programs</a></li>
+        <li><a href="#shop" class="mobile-link"><span class="m-icon">🛍️</span> Shop & Merch</a></li>
+        <li><a href="#calculator" class="mobile-link"><span class="m-icon">🧮</span> BMI & Calorie Calc</a></li>
+        <li><a href="#pricing" class="mobile-link"><span class="m-icon">💎</span> Memberships</a></li>
+        <li><a href="#trainers" class="mobile-link"><span class="m-icon">🏋️</span> Master Coaches</a></li>
+        <li><a href="#testimonials" class="mobile-link"><span class="m-icon">⭐</span> Testimonials</a></li>
+        <li><a href="#contact" class="mobile-link"><span class="m-icon">📍</span> Contact & Hours</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="#pricing" class="btn btn-primary w-full" id="mobile-nav-cta" onclick="closeMobileNav()">Claim 7-Day Free Trial</a>
+        <div class="mobile-info-pill">
+          <span>📞 +1 (800) 555-VERSA</span>
+          <span>🕒 24/7 Access For Members</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="badge-pill">
+          <span class="pulse-dot"></span> New 2026 High-Performance Protocol
+        </div>
+        <h1 class="hero-title">
+          UNLEASH YOUR <span class="text-gradient">ULTIMATE</span> VERSATILITY.
+        </h1>
+        <p class="hero-subtitle">
+          Versatile Fitness combines elite functional bodybuilding, hybrid endurance conditioning, and precision recovery science to sculpt peak human performance.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#pricing" class="btn btn-primary btn-lg" id="hero-get-started">Start 7-Day Free Trial</a>
+          <a href="#programs" class="btn btn-outline btn-lg" id="hero-explore-programs">Explore Protocols</a>
+        </div>
+        
+        <div class="hero-stats-row">
+          <div class="stat-item">
+            <div class="stat-number">12k+</div>
+            <div class="stat-label">Active Members</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-number">98.4%</div>
+            <div class="stat-label">Goal Completion</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-number">45+</div>
+            <div class="stat-label">Master Coaches</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-wrapper glow-border">
+          <img src="assets/hero.jpg" alt="Versatile Fitness Studio" class="hero-img">
+          <div class="floating-badge badge-top">
+            <span class="badge-icon">⚡</span>
+            <div>
+              <div class="badge-title">Hybrid Strength</div>
+              <div class="badge-sub">Adaptive Loading System</div>
+            </div>
+          </div>
+          <div class="floating-badge badge-bottom">
+            <span class="badge-icon">🔥</span>
+            <div>
+              <div class="badge-title">850+ kcal</div>
+              <div class="badge-sub">Avg Session Burn</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Highlights Bar -->
+  <section class="highlights-bar" id="highlights">
+    <div class="container highlights-container">
+      <div class="highlight-card">
+        <div class="highlight-icon">🏆</div>
+        <div>
+          <h4>State-of-The-Art Equipment</h4>
+          <p>Hammer Strength, Eleiko Olympic bars & bio-tracking sensors.</p>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">⏱️</div>
+        <div>
+          <h4>24/7 Biometric Access</h4>
+          <p>Work out on your timetable with secure keyless smart entry.</p>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🥗</div>
+        <div>
+          <h4>Tailored Nutrition Plans</h4>
+          <p>Macro-balanced nutrition protocols curated by certified dietitians.</p>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🧊</div>
+        <div>
+          <h4>Cryo & Infrared Recovery</h4>
+          <p>Cold plunges, infrared saunas, and pneumatic compression boots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Brand Philosophy -->
+  <section class="about-section" id="about">
+    <div class="container about-grid">
+      <div class="about-image-col">
+        <div class="about-img-card glow-border">
+          <img src="assets/trainer.jpg" alt="Master Coach at Versatile Fitness">
+          <div class="about-stat-tag">
+            <strong>Certified</strong> Top 1% National Coaches
+          </div>
+        </div>
+      </div>
+      <div class="about-content-col">
+        <span class="section-tag">THE VERSATILE PHILOSOPHY</span>
+        <h2 class="section-title">BUILT FOR EVERY ATHLETE, RIGID FOR NONE.</h2>
+        <p class="section-desc">
+          At Versatile Fitness, we believe fitness should enhance life, not constrain it. We merge high-intensity athletic conditioning with aesthetic bodybuilding principles so you can sprint, lift heavy, move without pain, and look your absolute best.
+        </p>
+        
+        <div class="about-features-list">
+          <div class="feature-bullet">
+            <div class="bullet-check">✓</div>
+            <div>
+              <strong>Biomechanical Optimization</strong>
+              <p>Assess movements and eliminate joint wear while building clean functional power.</p>
+            </div>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-check">✓</div>
+            <div>
+              <strong>Progressive Metric Tracking</strong>
+              <p>Our proprietary app charts your 1RM, VO2 max, resting HR, and body composition.</p>
+            </div>
+          </div>
+          <div class="feature-bullet">
+            <div class="bullet-check">✓</div>
+            <div>
+              <strong>Inclusive High-Drive Culture</strong>
+              <p>Surround yourself with members who push each other past every mental plateau.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#programs" class="btn btn-primary" id="about-learn-more">Explore Our Training Tracks</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section class="programs-section" id="programs">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">ELITE PROTOCOLS</span>
+        <h2 class="section-title">CHOOSE YOUR DISCIPLINE</h2>
+        <p class="section-desc max-w-600">
+          Engineered for rapid muscular hypertrophy, peak cardiovascular endurance, and athletic resilience.
+        </p>
+      </div>
+
+      <div class="programs-grid">
+        <!-- Program 1 -->
+        <div class="program-card glow-border">
+          <div class="program-badge">Most Popular</div>
+          <div class="program-header">
+            <span class="prog-icon">⚡</span>
+            <h3>VersaPower (Strength)</h3>
+          </div>
+          <p class="prog-summary">Focuses on progressive overload, compound lifts, power clean mechanics, and core stabilization.</p>
+          <ul class="prog-specs">
+            <li><span>Duration:</span> 60 Mins</li>
+            <li><span>Intensity:</span> High / Power</li>
+            <li><span>Focus:</span> Hypertrophy & Power</li>
+          </ul>
+          <button class="btn btn-outline w-full prog-select-btn" onclick="openBooking('VersaPower (Strength)')">Book Trial Class</button>
+        </div>
+
+        <!-- Program 2 -->
+        <div class="program-card featured-program glow-border">
+          <div class="program-badge badge-hot">Signature</div>
+          <div class="program-header">
+            <span class="prog-icon">🔥</span>
+            <h3>Hybrid Engine (HIIT)</h3>
+          </div>
+          <p class="prog-summary">Interval sprints, assault bikes, kettlebells, and bodyweight plyometrics designed to burn fat and push VO2 Max.</p>
+          <ul class="prog-specs">
+            <li><span>Duration:</span> 45 Mins</li>
+            <li><span>Intensity:</span> Maximum</li>
+            <li><span>Focus:</span> Stamina & Fat Shred</li>
+          </ul>
+          <button class="btn btn-primary w-full prog-select-btn" onclick="openBooking('Hybrid Engine (HIIT)')">Book Trial Class</button>
+        </div>
+
+        <!-- Program 3 -->
+        <div class="program-card glow-border">
+          <div class="program-badge">Longevity</div>
+          <div class="program-header">
+            <span class="prog-icon">🧘</span>
+            <h3>Mobility & Rebuild</h3>
+          </div>
+          <p class="prog-summary">Active neuromuscular facilitation, deep fascial decompression, and joint stabilization to bulletproof your physique.</p>
+          <ul class="prog-specs">
+            <li><span>Duration:</span> 50 Mins</li>
+            <li><span>Intensity:</span> Low-Mod / Restorative</li>
+            <li><span>Focus:</span> Recovery & Flex</li>
+          </ul>
+          <button class="btn btn-outline w-full prog-select-btn" onclick="openBooking('Mobility & Rebuild')">Book Trial Class</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive BMI & Calorie Tool -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <div class="calc-box glow-border">
+        <div class="calc-info">
+          <span class="section-tag">SMART TOOLS</span>
+          <h2 class="section-title">CALCULATE YOUR BASELINE METRICS</h2>
+          <p>
+            Get instant insights into your current Body Mass Index (BMI) and recommended daily calorie targets based on your goals.
+          </p>
+          <div class="calc-tips">
+            <div class="tip-item">
+              <span class="tip-dot dot-blue"></span> Underweight: &lt; 18.5
+            </div>
+            <div class="tip-item">
+              <span class="tip-dot dot-green"></span> Normal weight: 18.5 – 24.9
+            </div>
+            <div class="tip-item">
+              <span class="tip-dot dot-yellow"></span> Overweight: 25 – 29.9
+            </div>
+            <div class="tip-item">
+              <span class="tip-dot dot-red"></span> Obese: 30+
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-form-container">
+          <form id="bmi-calc-form" class="calc-form">
+            <div class="form-row">
+              <div class="input-group">
+                <label for="calc-height">Height (cm)</label>
+                <input type="number" id="calc-height" placeholder="e.g. 178" required min="100" max="250">
+              </div>
+              <div class="input-group">
+                <label for="calc-weight">Weight (kg)</label>
+                <input type="number" id="calc-weight" placeholder="e.g. 75" required min="30" max="250">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label for="calc-age">Age</label>
+                <input type="number" id="calc-age" placeholder="e.g. 26" required min="12" max="100">
+              </div>
+              <div class="input-group">
+                <label for="calc-goal">Primary Goal</label>
+                <select id="calc-goal">
+                  <option value="lean">Lean Muscle & Fat Loss (-15% kcal)</option>
+                  <option value="hypertrophy">Maximum Muscle Mass (+15% kcal)</option>
+                  <option value="maintain">Performance & Maintenance</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-full" id="btn-calc-submit">Calculate Now</button>
+          </form>
+
+          <!-- Result Card -->
+          <div class="calc-result" id="calc-result" style="display: none;">
+            <div class="result-header">
+              <h4>Your Assessment:</h4>
+              <span class="bmi-score" id="bmi-score">22.4</span>
+            </div>
+            <p class="bmi-status" id="bmi-status">Normal healthy weight range.</p>
+            <div class="calorie-target">
+              <span>Target Daily Intake:</span>
+              <strong id="calorie-count">2,450 kcal/day</strong>
+            </div>
+            <a href="#pricing" class="btn btn-outline btn-sm mt-3">Match A Nutrition Program</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Versatile Fitness Shop & Merch -->
+  <section class="shop-section" id="shop">
+    <div class="container">
+      <div class="section-header shop-header">
+        <div class="shop-header-text">
+          <span class="section-tag">VERSATILE STORE</span>
+          <h2 class="section-title">HIGH-PERFORMANCE GEAR & SUPPLEMENTS</h2>
+          <p class="section-desc">Clinical-grade pure supplements, competition-ready apparel, and gym accessories.</p>
+        </div>
+        <div class="shop-banner-img">
+          <img src="assets/shop.jpg" alt="Versatile Fitness Supplements and Gear">
+        </div>
+      </div>
+
+      <div class="product-filters" id="shop-filters">
+        <button class="filter-btn active" data-category="all">All Products</button>
+        <button class="filter-btn" data-category="supplements">Supplements</button>
+        <button class="filter-btn" data-category="gear">Apparel & Gear</button>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Injected via Javascript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Memberships & Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">MEMBERSHIP TIERS</span>
+        <h2 class="section-title">INVEST IN YOUR HEALTH</h2>
+        <p class="section-desc max-w-600">No lock-in contracts. Cancel anytime. 100% transparent pricing.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1 -->
+        <div class="price-card glow-border">
+          <h3 class="tier-name">Standard Access</h3>
+          <p class="tier-desc">Ideal for self-directed athletes seeking world-class gym floor access.</p>
+          <div class="tier-price">
+            <span class="currency">$</span><span class="amount">49</span><span class="period">/mo</span>
+          </div>
+          <ul class="tier-features">
+            <li>✓ 24/7 Floor and Free Weights Access</li>
+            <li>✓ Locker Room & Steam Sauna</li>
+            <li>✓ Versatile Mobile App Companion</li>
+            <li class="disabled">✗ Personal Training Sessions</li>
+            <li class="disabled">✗ Cryotherapy Plunge Access</li>
+          </ul>
+          <button class="btn btn-outline w-full" onclick="openJoinModal('Standard Access', '$49/mo')">Select Plan</button>
+        </div>
+
+        <!-- Tier 2 (Highlighted) -->
+        <div class="price-card popular-card glow-border">
+          <div class="popular-ribbon">BEST VALUE</div>
+          <h3 class="tier-name">Pro Athlete</h3>
+          <p class="tier-desc">Complete holistic coaching, unlimited class access, and recovery lounges.</p>
+          <div class="tier-price">
+            <span class="currency">$</span><span class="amount">89</span><span class="period">/mo</span>
+          </div>
+          <ul class="tier-features">
+            <li>✓ Everything in Standard Access</li>
+            <li>✓ Unlimited HIIT & Strength Classes</li>
+            <li>✓ 2x Monthly 1-on-1 Coaching Consults</li>
+            <li>✓ Cold Plunge & Infrared Sauna Suite</li>
+            <li>✓ 15% Discount at Versatile Shop</li>
+          </ul>
+          <button class="btn btn-primary w-full" onclick="openJoinModal('Pro Athlete', '$89/mo')">Claim 7-Day Trial</button>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="price-card glow-border">
+          <h3 class="tier-name">Elite Performance</h3>
+          <p class="tier-desc">Dedicated master trainer, custom meal preparation guidance, and biometric lab testing.</p>
+          <div class="tier-price">
+            <span class="currency">$</span><span class="amount">169</span><span class="period">/mo</span>
+          </div>
+          <ul class="tier-features">
+            <li>✓ Everything in Pro Athlete Plan</li>
+            <li>✓ 4x Monthly Private Training Sessions</li>
+            <li>✓ Quarterly InBody & DEXA Biometrics</li>
+            <li>✓ Custom Nutrition & Macro Management</li>
+            <li>✓ VIP Towel & Locker Reservation</li>
+          </ul>
+          <button class="btn btn-outline w-full" onclick="openJoinModal('Elite Performance', '$169/mo')">Select Plan</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coaches & Master Trainers Section -->
+  <section class="trainers-section" id="trainers">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">EXPERT GUIDANCE</span>
+        <h2 class="section-title">MEET OUR MASTER COACHES</h2>
+        <p class="section-desc max-w-600">
+          World-class athletic trainers, certified biomechanics specialists, and Olympic lifters dedicated to your transformation.
+        </p>
+      </div>
+
+      <div class="trainers-grid">
+        <div class="trainer-card glow-border">
+          <div class="trainer-badge-pill">Strength Lead</div>
+          <div class="trainer-avatar-box">
+            <span class="avatar-initials">ER</span>
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">Elena Rostova</h3>
+            <span class="trainer-title">Head of Functional Hypertrophy</span>
+            <p class="trainer-desc">CSCS certified with 10+ years coaching national powerlifters, Olympic lifters, and hybrid athletes.</p>
+            <div class="trainer-tags">
+              <span>Biomechanics</span>
+              <span>Strength</span>
+              <span>1RM Prep</span>
+            </div>
+            <button class="btn btn-outline btn-sm w-full mt-3" onclick="openBooking('1-on-1 Session with Elena Rostova')">Book Assessment</button>
+          </div>
+        </div>
+
+        <div class="trainer-card glow-border popular-trainer">
+          <div class="trainer-badge-pill badge-hot">Conditioning Director</div>
+          <div class="trainer-avatar-box">
+            <span class="avatar-initials">MT</span>
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">Marcus Thorne</h3>
+            <span class="trainer-title">Director of Metabolic Conditioning</span>
+            <p class="trainer-desc">Former decathlete specializing in lactate threshold training, VO2 Max improvement, and high-cadence HIIT.</p>
+            <div class="trainer-tags">
+              <span>HIIT Protocol</span>
+              <span>VO2 Max</span>
+              <span>Kettlebells</span>
+            </div>
+            <button class="btn btn-primary btn-sm w-full mt-3" onclick="openBooking('1-on-1 Session with Marcus Thorne')">Book Assessment</button>
+          </div>
+        </div>
+
+        <div class="trainer-card glow-border">
+          <div class="trainer-badge-pill">Longevity Lead</div>
+          <div class="trainer-avatar-box">
+            <span class="avatar-initials">JV</span>
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">Dr. Julian Vance</h3>
+            <span class="trainer-title">Doctor of Physical Therapy & Mobility</span>
+            <p class="trainer-desc">Expert in neuromuscular re-education, active joint decompression, and bulletproofing tendons from injury.</p>
+            <div class="trainer-tags">
+              <span>Post-Rehab</span>
+              <span>Fascial Stretch</span>
+              <span>Mobility</span>
+            </div>
+            <button class="btn btn-outline btn-sm w-full mt-3" onclick="openBooking('1-on-1 Session with Dr. Julian Vance')">Book Assessment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & Reviews -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">REAL TRANSFORMATIONS</span>
+        <h2 class="section-title">WHAT OUR ATHLETES SAY</h2>
+        <p class="section-desc max-w-600">Hear from our members who have elevated their power, endurance, and daily vitality.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card glow-border">
+          <div class="star-rating">★★★★★</div>
+          <p class="quote">"Versatile Fitness completely altered my outlook on training. In 6 months I lost 18lbs while increasing my deadlift by 65lbs. The community vibe is electric."</p>
+          <div class="author-info">
+            <div class="author-avatar">MR</div>
+            <div>
+              <strong>Marcus Reed</strong>
+              <span>Marathoner & Cross-Athlete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card glow-border">
+          <div class="star-rating">★★★★★</div>
+          <p class="quote">"The coaches here are obsessive about technique and safety. No ego lifting, just pure progression, science-backed guidance, and top-tier recovery amenities."</p>
+          <div class="author-info">
+            <div class="author-avatar">SL</div>
+            <div>
+              <strong>Sarah Lin</strong>
+              <span>Member for 2 Years</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card glow-border">
+          <div class="star-rating">★★★★★</div>
+          <p class="quote">"Having the supplement bar, cold plunges, and modern squat racks under one roof saves me hours every week. Versatile is hands down the best gym in the city."</p>
+          <div class="author-info">
+            <div class="author-avatar">DK</div>
+            <div>
+              <strong>David K.</strong>
+              <span>Competitive Powerlifter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Location Section -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info-col">
+        <span class="section-tag">GET IN TOUCH</span>
+        <h2 class="section-title">READY TO STEP UP?</h2>
+        <p class="section-desc">Drop by for a coffee and tour of our facility, or submit an inquiry to schedule your complimentary physical evaluation.</p>
+        
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="c-icon">📍</div>
+            <div>
+              <strong>Studio Location:</strong>
+              <p>402 Ironwork Boulevard, Suite 100, Metro Core</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">📞</div>
+            <div>
+              <strong>Phone Support:</strong>
+              <p>+1 (800) 555-VERSA</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">✉️</div>
+            <div>
+              <strong>Email:</strong>
+              <p>hello@versatilefitness.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">🕒</div>
+            <div>
+              <strong>Operating Hours:</strong>
+              <p>Members: 24/7/365 | Staffed: 6:00 AM - 10:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-col">
+        <form class="contact-form glow-border" id="contact-form" onsubmit="handleContactSubmit(event)">
+          <h3>Book Your Complimentary Pass</h3>
+          <p class="form-sub-text">Fill out your details to receive an instant QR entry pass.</p>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="contact-name">Full Name</label>
+              <input type="text" id="contact-name" placeholder="John Doe" required>
+            </div>
+            <div class="input-group">
+              <label for="contact-phone">Phone Number</label>
+              <input type="tel" id="contact-phone" placeholder="(555) 000-0000" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" placeholder="john@example.com" required>
+          </div>
+          <div class="input-group">
+            <label for="contact-interest">Interested Program</label>
+            <select id="contact-interest">
+              <option value="strength">VersaPower Strength</option>
+              <option value="hiit">Hybrid Engine HIIT</option>
+              <option value="mobility">Mobility & Rebuild</option>
+              <option value="personal">1-on-1 Master Coaching</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="contact-msg">Notes / Fitness Goals (Optional)</label>
+            <textarea id="contact-msg" rows="3" placeholder="Tell us what you want to achieve..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-full" id="contact-submit-btn">Claim Free Day Pass</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="brand-logo footer-logo">
+          <span class="logo-accent">VERSATILE</span> FITNESS
+        </a>
+        <p>
+          Redefining human performance with elite engineering, tailored nutrition, and high-impact functional training.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="Twitter">X</a>
+          <a href="#" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">About Studio</a></li>
+          <li><a href="#programs">Training Tracks</a></li>
+          <li><a href="#shop">Gear & Supplements</a></li>
+          <li><a href="#pricing">Memberships</a></li>
+          <li><a href="#trainers">Master Coaches</a></li>
+          <li><a href="#calculator">BMI Calculator</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Support & Policies</h4>
+        <ul>
+          <li><a href="#">Member FAQ</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Shipping & Returns</a></li>
+          <li><a href="#">Corporate Wellness</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-newsletter">
+        <h4>Weekly Pulse Newsletter</h4>
+        <p>Get evidence-based training routines, macro-friendly recipes, and member discounts delivered weekly.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="Your email address" required id="newsletter-email">
+          <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container bottom-row">
+        <p>&copy; 2026 Versatile Fitness Club Inc. All rights reserved.</p>
+        <p>Crafted for peak human potential.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shopping Cart Slide-out Drawer -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-drawer-header">
+      <h3>Your Versatile Cart</h3>
+      <button class="close-cart-btn" id="close-cart-btn" aria-label="Close Cart">&times;</button>
+    </div>
+    <div class="cart-drawer-items" id="cart-drawer-items">
+      <!-- Items dynamically populated -->
+      <div class="empty-cart-msg">Your cart is currently empty.</div>
+    </div>
+    <div class="cart-drawer-footer">
+      <div class="cart-subtotal-row">
+        <span>Subtotal:</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <button class="btn btn-primary w-full" id="checkout-btn" onclick="handleCheckout()">Proceed to Checkout</button>
+      <button class="btn btn-outline btn-sm w-full mt-2" onclick="closeCart()">Continue Shopping</button>
+    </div>
+  </aside>
+
+  <!-- Interactive Modal (Class Booking & Membership) -->
+  <div class="modal-backdrop" id="generic-modal" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close dialog">&times;</button>
+      <div id="modal-body-content">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
