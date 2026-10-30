@@ -1,5 +1,5 @@
 // ==========================================================================
-// Versatile Fitness - Interactive Logic, Store & Tools
+// Versatile Fitness - Interactive Logic, Store, Theme & Navigation
 // ==========================================================================
 
 // Product Catalog Data
@@ -65,14 +65,176 @@ let cart = [];
 
 // Initialize DOM
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+  initMobileNav();
   renderProducts('all');
   initFilterButtons();
   initBMICalculator();
   initCartDrawer();
   initHeaderScroll();
+  initActiveNavSpy();
+  initModalBackdropClick();
 });
 
-// Render Products to Grid
+// ==========================================================================
+// Subtle Theme Switcher (Subtle Light / Subtle Dark)
+// ==========================================================================
+function initThemeToggle() {
+  const toggleBtn = document.getElementById('theme-toggle');
+  const metaThemeColor = document.getElementById('meta-theme-color');
+  
+  // Default to subtle light palette (or stored preference)
+  const savedTheme = localStorage.getItem('vf-theme') || 'light';
+  applyTheme(savedTheme);
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('vf-theme', newTheme);
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme === 'dark' ? '#0f141c' : '#f8fafc');
+    }
+    if (toggleBtn) {
+      toggleBtn.setAttribute(
+        'title', 
+        theme === 'dark' ? 'Switch to Subtle Light Mode' : 'Switch to Subtle Dark Mode'
+      );
+    }
+  }
+}
+
+// ==========================================================================
+// Mobile Navigation Drawer
+// ==========================================================================
+function initMobileNav() {
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const closeBtn = document.getElementById('mobile-nav-close');
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = toggleBtn.classList.contains('active');
+      if (isOpen) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
+  if (overlay) overlay.addEventListener('click', closeMobileNav);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileNav();
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileNav();
+      closeCart();
+      closeModal();
+    }
+  });
+}
+
+function openMobileNav() {
+  const drawer = document.getElementById('mobile-nav-drawer');
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const toggleBtn = document.getElementById('mobile-toggle');
+
+  if (drawer) drawer.classList.add('active');
+  if (overlay) overlay.classList.add('active');
+  if (toggleBtn) {
+    toggleBtn.classList.add('active');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+  document.body.classList.add('no-scroll');
+}
+
+function closeMobileNav() {
+  const drawer = document.getElementById('mobile-nav-drawer');
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const toggleBtn = document.getElementById('mobile-toggle');
+
+  if (drawer) drawer.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+  if (toggleBtn) {
+    toggleBtn.classList.remove('active');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+  document.body.classList.remove('no-scroll');
+}
+
+// ==========================================================================
+// Header Scroll & Active Section Spy
+// ==========================================================================
+function initHeaderScroll() {
+  const header = document.getElementById('header');
+  if (!header) return;
+
+  const handleScroll = () => {
+    if (window.scrollY > 25) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+}
+
+function initActiveNavSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const desktopLinks = document.querySelectorAll('.main-nav .nav-link');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        
+        desktopLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        mobileLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -70% 0px'
+  });
+
+  sections.forEach(section => observer.observe(section));
+}
+
+// ==========================================================================
+// Products & Shop Logic
+// ==========================================================================
 function renderProducts(category) {
   const container = document.getElementById('products-grid');
   if (!container) return;
@@ -102,7 +264,6 @@ function renderProducts(category) {
   `).join('');
 }
 
-// Filter buttons interaction
 function initFilterButtons() {
   const buttons = document.querySelectorAll('.filter-btn');
   buttons.forEach(btn => {
@@ -115,7 +276,9 @@ function initFilterButtons() {
   });
 }
 
+// ==========================================================================
 // BMI & Calorie Calculator
+// ==========================================================================
 function initBMICalculator() {
   const form = document.getElementById('bmi-calc-form');
   const resultBox = document.getElementById('calc-result');
@@ -132,20 +295,20 @@ function initBMICalculator() {
     const age = parseInt(document.getElementById('calc-age').value);
     const goal = document.getElementById('calc-goal').value;
 
-    if (!h || !w) return;
+    if (!h || !w || h <= 0 || w <= 0) return;
 
     const bmi = (w / (h * h)).toFixed(1);
     bmiScore.textContent = bmi;
 
     let statusText = '';
     if (bmi < 18.5) {
-      statusText = 'Underweight: Focus on calorie surplus and strength building.';
+      statusText = 'Underweight: Focus on calorie surplus and functional strength building.';
     } else if (bmi < 24.9) {
-      statusText = 'Normal healthy range: Optimized for lean muscle & performance.';
+      statusText = 'Normal healthy range: Optimized for lean muscle & peak performance.';
     } else if (bmi < 29.9) {
-      statusText = 'Overweight: Great opportunity for body recomposition and HIIT.';
+      statusText = 'Overweight: Great opportunity for body recomposition and hybrid conditioning.';
     } else {
-      statusText = 'High body mass: Recommended supervised low-impact conditioning.';
+      statusText = 'High body mass: Recommended supervised low-impact cardiovascular conditioning.';
     }
     bmiStatus.textContent = statusText;
 
@@ -164,7 +327,9 @@ function initBMICalculator() {
   });
 }
 
-// Shopping Cart Functions
+// ==========================================================================
+// Shopping Cart Drawer Logic
+// ==========================================================================
 function initCartDrawer() {
   const cartBtn = document.getElementById('cart-btn');
   const closeBtn = document.getElementById('close-cart-btn');
@@ -178,11 +343,13 @@ function initCartDrawer() {
 function openCart() {
   document.getElementById('cart-drawer').classList.add('active');
   document.getElementById('cart-drawer-overlay').classList.add('active');
+  document.body.classList.add('no-scroll');
 }
 
 function closeCart() {
   document.getElementById('cart-drawer').classList.remove('active');
   document.getElementById('cart-drawer-overlay').classList.remove('active');
+  document.body.classList.remove('no-scroll');
 }
 
 function addToCart(productId) {
@@ -225,7 +392,7 @@ function updateCartUI() {
 
   itemsContainer.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div style="font-size: 1.5rem;">${item.icon}</div>
+      <div style="font-size: 1.5rem; line-height: 1;">${item.icon}</div>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-price">$${item.price.toFixed(2)} × ${item.qty}</div>
@@ -241,41 +408,60 @@ function handleCheckout() {
     return;
   }
   closeCart();
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
   openModal(`
-    <h3 style="margin-bottom: 1rem; color: #2eea99;">Order Confirmation Demo</h3>
-    <p style="color: #9ba7b8; margin-bottom: 1.5rem;">
-      Thank you for testing the Versatile Fitness checkout flow!
+    <h3 style="margin-bottom: 0.85rem; color: var(--accent-neon);">Order Confirmation Demo</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1.25rem; font-size: 0.95rem;">
+      Thank you for exploring the Versatile Fitness checkout flow!
     </p>
-    <div style="background: #1d2332; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
-      <strong>Order Total: $${cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2)}</strong>
-      <p style="font-size: 0.85rem; color: #687588; margin-top: 0.3rem;">Instant confirmation will be simulated for demo purposes.</p>
+    <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 10px; margin-bottom: 1.5rem;">
+      <strong style="font-size: 1.15rem; color: var(--text-main); display: block;">Order Total: $${total}</strong>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem;">
+        Instant order confirmation is simulated for demonstration purposes.
+      </p>
     </div>
     <button class="btn btn-primary w-full" onclick="cart = []; updateCartUI(); closeModal();">Complete Demo Order</button>
   `);
 }
 
-// Modal handling
+// ==========================================================================
+// Modal Logic & Templates
+// ==========================================================================
 function openModal(contentHtml) {
   const modal = document.getElementById('generic-modal');
   const body = document.getElementById('modal-body-content');
   if (!modal || !body) return;
   body.innerHTML = contentHtml;
   modal.style.display = 'flex';
+  document.body.classList.add('no-scroll');
 }
 
 function closeModal() {
   const modal = document.getElementById('generic-modal');
-  if (modal) modal.style.display = 'none';
+  if (modal) {
+    modal.style.display = 'none';
+  }
+  document.body.classList.remove('no-scroll');
+}
+
+function initModalBackdropClick() {
+  const modal = document.getElementById('generic-modal');
+  if (!modal) return;
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
 }
 
 function openBooking(programName) {
   openModal(`
-    <h3 style="margin-bottom: 0.5rem; color: #2eea99;">Book Trial Session</h3>
-    <h4 style="margin-bottom: 1rem;">${programName}</h4>
-    <p style="color: #9ba7b8; font-size: 0.9rem; margin-bottom: 1.25rem;">
-      Experience this protocol with a master trainer at Versatile Fitness. Complimentary for first-time visitors.
+    <h3 style="margin-bottom: 0.35rem; color: var(--accent-neon);">Book Trial Session</h3>
+    <h4 style="margin-bottom: 0.85rem; font-size: 1.15rem;">${programName}</h4>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+      Experience this protocol with a master coach at Versatile Fitness. Complimentary for first-time visitors.
     </p>
-    <form onsubmit="handleBookingSubmit(event, '${programName}')" style="display: flex; flex-direction: column; gap: 0.85rem;">
+    <form onsubmit="handleBookingSubmit(event, '${programName}')" style="display: flex; flex-direction: column; gap: 0.95rem;">
       <div class="input-group">
         <label>Select Date:</label>
         <input type="date" required value="${new Date().toISOString().split('T')[0]}">
@@ -306,12 +492,12 @@ function handleBookingSubmit(e, programName) {
 
 function openJoinModal(tierName, price) {
   openModal(`
-    <h3 style="color: #2eea99; margin-bottom: 0.25rem;">Activate Membership</h3>
-    <div style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">${tierName} (${price})</div>
-    <p style="color: #9ba7b8; font-size: 0.9rem; margin-bottom: 1.5rem;">
-      Includes 7-day no-risk trial, biometric scan access, and full facility privileges.
+    <h3 style="color: var(--accent-neon); margin-bottom: 0.25rem;">Activate Membership</h3>
+    <div style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);">${tierName} (${price})</div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+      Includes 7-day risk-free trial, biometric scan access, and full facility privileges.
     </p>
-    <form onsubmit="handleJoinSubmit(event, '${tierName}')" style="display: flex; flex-direction: column; gap: 0.85rem;">
+    <form onsubmit="handleJoinSubmit(event, '${tierName}')" style="display: flex; flex-direction: column; gap: 0.95rem;">
       <div class="input-group">
         <label>Full Name:</label>
         <input type="text" placeholder="Sarah Connor" required>
@@ -341,17 +527,4 @@ function handleNewsletter(e) {
   e.preventDefault();
   alert('Thank you for subscribing to The Versatile Pulse weekly newsletter!');
   document.getElementById('newsletter-email').value = '';
-}
-
-function initHeaderScroll() {
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.7)';
-      header.style.background = 'rgba(10, 12, 16, 0.95)';
-    } else {
-      header.style.boxShadow = 'none';
-      header.style.background = 'rgba(10, 12, 16, 0.85)';
-    }
-  });
 }
